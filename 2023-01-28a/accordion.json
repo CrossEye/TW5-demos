@@ -1,0 +1,29 @@
+[
+    {
+        "created": "20230128014501415",
+        "text": "\\define accordion(filter, height:\"300px\")\n\n<$set name=\"height\" value=\"$height$\" >\n<$set name=\"acc\" value=<<qualify \"accordion\">> >\n<$set name=\"classname\" value={{{ [<acc>addprefix[accordion ac-]] }}} >\n\n<section class=<<classname>> >\n<$list filter=\"$filter$ +[first[]]\" counter=\"counter\">\n<$set name=\"id\" value={{{ [<counter>addprefix[-]addprefix<acc>addprefix[ac-]] }}}>\n<$wikify name=\"content\" text={{!!text}} output=\"html\">\n    <div>\n        <input id=<<id>> name=<<acc>> type=\"radio\" checked=\"checked\">\n        <label for=<<id>> >{{!!title}}</label>\n        <article><div><<content>></div></article>\n    </div>\n</$wikify>\n</$set>\n</$list>\n<$list filter=\"$filter$ +[rest[]]\" counter=\"counter\">\n<$set name=\"id\" value={{{ [<counter>add[1]addprefix[-]addprefix<acc>addprefix[ac-]] }}}>\n<$wikify name=\"content\" text={{!!text}} output=\"html\">\n    <div>\n        <input id=<<id>> name=<<acc>> type=\"radio\">\n        <label for=<<id>> >{{!!title}}</label>\n        <article><div><<content>></div></article>\n    </div>\n</$wikify>\n</$set>\n</$list>\n</section>\n\n<style>\n    <$text text={{{ [<acc>addprefix[.accordion.ac-]addsuffix[ input:checked ~ article {height: ]addsuffix<height>addsuffix[ ;} ]] }}} />\n</style>\n\n</$set>\n</$set>\n</$set>\n\n\\end\n",
+        "tags": "$:/tags/Macro",
+        "title": "$:/_/my/macros/accordion",
+        "modified": "20230128153139901",
+        "type": "text/vnd.tiddlywiki",
+        "bag": "default",
+        "revision": "1"
+    },
+    {
+        "created": "20230128004928475",
+        "text": ".accordion label {\n    height: 30px;\n    padding: 5px 20px;\n    position: relative;\n    z-index: 20;\n    display: block;\n    cursor: pointer;\n    color: #777;\n    text-shadow: 1px 1px 1px rgba(255,255,255,0.8);\n    background: #fff;\n    background: linear-gradient(top,#fff 1%,#eaeaea 100%);\n    box-shadow: 0 0 0 1px rgba(155,155,155,0.3), 1px 0 0 rgba(255,255,255,0.9) inset, 0 2px 2px rgba(0,0,0,0.1);\n}\n\n.accordion {\n    width: 100%;\n    margin: 10px auto 30px auto;\n    text-align: left;\n}\n\n.accordion label:hover {\n    background: #fff;\n}\n\n.accordion input:checked + label,.accordion input:checked + label:hover {\n    background: #f1f2f3;\n    color: #666;\n    text-shadow: 0 1px 1px rgba(255,255,255,0.6);\n    box-shadow: 0 0 0 1px rgba(155,155,155,0.3), 0 2px 2px rgba(0,0,0,0.1);\n    height: 30px;\n}\n\n.accordion label:hover:after,.accordion input:checked + label:hover:after {\n    content: '';\n    position: absolute;\n    width: 24px;\n    height: 24px;\n    right: 13px;\n    top: 7px;\n}\n\n.accordion input {\n    display: none;\n}\n\n.accordion article {\n    background: rgba(255,255,255,0.5);\n    margin-top: -1px;\n    overflow: auto;\n    height: 0;\n    position: relative;\n    z-index: 10;\n    transition: height 0.5s ease-in-out, box-shadow 0.6s linear;\n}\n\n.accordion article div {\n    font-style: normal;\n    color: #777;\n    padding: 20px;\n    text-shadow: 1px 1px 1px rgba(255,255,255,0.8);\n}\n\n.accordion input:checked ~ article {\n    transition: height 0.5s ease-in-out, box-shadow 0.1s linear;\n    box-shadow: 0 0 0 1px rgba(155,155,155,0.3);\n}\n\n.accordion input:checked ~ article {\n    height: 300px;\n}\n",
+        "tags": "$:/tags/Stylesheet",
+        "title": "$:/_/my/styles/accordion",
+        "modified": "20230128054557304",
+        "type": "text/css",
+        "bag": "default",
+        "revision": "0"
+    },
+    {
+        "created": "20230128153835919",
+        "text": "<<accordion [tag[Editions]] >>",
+        "tags": "",
+        "title": "examples/accordion101",
+        "modified": "20230128154022970"
+    }
+]
